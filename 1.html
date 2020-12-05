@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.min.js"></script>
+    <script>
+      let aa = Immutable.fromJS({
+        'copyFlag': false,
+        'freightTempName': '默认模板23',
+        'freightTemplateGoodsFreeSaveRequests': [{
+          'destinationAreaName': ['和田地区', '伊犁哈萨克自治州'],
+          'createTime': '2018-05-18 15:18:13.000',
+          'deliverWay': 1,
+          'conditionOne': 33,
+          'conditionTwo': null,
+          'freightTempId': 61,
+          'conditionType': 0,
+          'delFlag': 0,
+          'valuationType': 1,
+          'id': 10,
+          'destinationArea': ['653200', '654000']
+        }, {
+          'destinationAreaName': ['昌吉回族自治州'],
+          'createTime': '2018-05-18 15:18:13.000',
+          'deliverWay': 1,
+          'conditionOne': 33,
+          'conditionTwo': 44,
+          'freightTempId': 61,
+          'conditionType': 2,
+          'delFlag': 0,
+          'valuationType': 1,
+          'id': 11,
+          'destinationArea': ['652300']
+        }],
+        'cityId': 110100,
+        'areaId': 110102,
+        'deliverWay': 1,
+        'provinceId': 110000,
+        'defaultFlag': 0,
+        'allProvince': [],
+        'visible': false,
+        'freightTempId': 61,
+        'freightTemplateGoodsExpressSaveRequests': [{
+          'provinces': [{
+            'provinceName': '新疆维吾尔自治区',
+            'provinceId': 650000,
+            'visible': true,
+            'checkStatus': 0,
+            'number': 1,
+            'disabled': true,
+            'children': [{
+              'cityName': '乌鲁木齐市',
+              'cityId': 650100,
+              'state': false,
+              'cityDisabled': true,
+              'id': 650000
+            }]
+          }],
+          'destinationAreaName': ['未被划分的配送地区自动归于默认运费'],
+          'freightStartNum': 1,
+          'createTime': '2018-05-18 15:18:13.000',
+          'freightPlusNum': 3,
+          'freightStartPrice': 2,
+          'freightPlusPrice': 4,
+          'defaultFlag': 1,
+          'visible': false,
+          'freightTempId': 61,
+          'delFlag': 0,
+          'valuationType': 1,
+          'id': 67,
+          'destinationArea': ['']
+        }, {
+          'provinces': [{
+            'provinceName': '新疆维吾尔自治区',
+            'provinceId': 650000,
+            'visible': true,
+            'checkStatus': 0,
+            'number': 1,
+            'disabled': true,
+            'children': [{
+              'cityName': '乌鲁木齐市',
+              'cityId': 650100,
+              'state': false,
+              'cityDisabled': true,
+              'id': 650000
+            }]
+          }],
+          'destinationAreaName': ['乌鲁木齐市', '克拉玛依市'],
+          'freightStartNum': 5,
+          'createTime': '2018-05-18 15:18:13.000',
+          'freightPlusNum': 5,
+          'freightStartPrice': 5,
+          'freightPlusPrice': 5,
+          'defaultFlag': 0,
+          'visible': false,
+          'freightTempId': 61,
+          'delFlag': 0,
+          'valuationType': 1,
+          'id': 68,
+          'destinationArea': ['650100', '650200']
+        }, {
+          'provinces': [{
+            'provinceName': '新疆维吾尔自治区',
+            'provinceId': 650000,
+            'visible': true,
+            'checkStatus': 0,
+            'number': 1,
+            'disabled': true,
+            'children': [{
+              'cityName': '乌鲁木齐市',
+              'cityId': 650100,
+              'state': false,
+              'cityDisabled': true,
+              'id': 650000
+            }]
+          }],
+          'destinationAreaName': ['昌吉回族自治州'],
+          'freightStartNum': 2,
+          'createTime': '2019-02-15 14:48:45.000',
+          'freightPlusNum': 2,
+          'freightStartPrice': 2,
+          'freightPlusPrice': 2,
+          'defaultFlag': 0,
+          'visible': false,
+          'freightTempId': 61,
+          'delFlag': 0,
+          'valuationType': 1,
+          'id': 109,
+          'destinationArea': ['652300']
+        }],
+        'specifyTermFlag': 1,
+        'freightFreeFlag': 0,
+        'valuationType': 1
+      });
+      // console.log('aa' + JSON.stringify(aa));
+      let treeData0 = Immutable.fromJS({
+          'provinceName': '新疆维吾尔自治区1',
+          'provinceId': 650000,
+          'visible': true,
+          'checkStatus': 0,
+          'number': 2,
+          'disabled': true,
+          'children': [{
+            'cityName': '乌鲁木齐市',
+            'cityId': 650100,
+            'state': true,
+            'cityDisabled': false,
+            'id': 650000
+          }]
+        })
+      ;
+      let treeData1 = Immutable.fromJS({
+          'provinceName': '新疆维吾尔自治区2',
+          'provinceId': 650000,
+          'visible': true,
+          'checkStatus': 0,
+          'number': 2,
+          'disabled': true,
+          'children': [{
+            'cityName': '乌鲁木齐市',
+            'cityId': 650100,
+            'state': false,
+            'cityDisabled': true,
+            'id': 650000
+          }]
+        })
+      ;
+
+      for (let i = 0; i <2 ; i++) {
+        let treeData;
+        if(i === 0) {
+          treeData = treeData0
+        } else {
+          treeData = treeData1
+        }
+        aa = aa.updateIn(
+          ['freightTemplateGoodsExpressSaveRequests', i],
+          (provinces) => provinces.set('provinces', treeData))
+      }
+      console.log('aa2' + JSON.stringify(aa));
+    </script>
+</head>
+<body>
+
+</body>
+</html>
